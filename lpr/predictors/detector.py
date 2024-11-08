@@ -40,11 +40,11 @@ class Frame:
         _plate_detection = _plate_detections.plates[0]
         
         # TODO: CUSTOM FILTER HARDCODE SUKAAA UBRAT!
-        if (_plate_detection.box[2] + _plate_detection.box[0]) / 2 < self.original_image.shape[1] * 0.25:
-            logging.info(f'Dropped frame with box={_plate_detection.box}')
-            return
+        # if (_plate_detection.box[2] + _plate_detection.box[0]) / 2 < self.original_image.shape[1] * 0.25:
+        #     logging.info(f'Dropped frame with box={_plate_detection.box}')
+        #     return
             
-        logging.info(f'Frame with box[3]={_plate_detection.box}')
+        # logging.info(f'Frame with box[3]={_plate_detection.box}')
         
         self._plate_detections = _plate_detections
         self.plate_detection = _plate_detection
