@@ -16,7 +16,7 @@ services:
     ports:
       - "8000:8000"
     environment:
-      - HOST_IP=192.168.0.100
+      - HOST_IP=192.168.25.246
       - DATABASE_URL=postgres://postgres:postgres@db:5432/acs_db
       - MEDIA_URL=/images/
       - MEDIA_ROOT=/images
