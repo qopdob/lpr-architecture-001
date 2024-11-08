@@ -1,3 +1,5 @@
+import os
+
 from django.contrib import admin
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
@@ -14,6 +16,8 @@ import csv
 
 
 logger = logging.getLogger(__name__)
+LOCALHOST_IP = os.getenv('HOST_IP') or '127.0.0.1'
+
 
 @admin.register(Company)
 class CompanyAdmin(admin.ModelAdmin):
@@ -184,7 +188,7 @@ class EventAdmin(admin.ModelAdmin):
 
     def license_plate_image(self, obj):
         if obj.license_plate:
-            image_url = f"http://localhost:5050/generate_image?plate={obj.license_plate}"
+            image_url = f"http://{LOCALHOST_IP}:5050/generate_image?plate={obj.license_plate}"
             return format_html('<img src="{}" alt="{}" style="max-height:25px;">', image_url, obj.license_plate)
         return '-'
     license_plate_image.short_description = _('License Plate')
