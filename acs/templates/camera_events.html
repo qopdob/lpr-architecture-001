@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block title %}{{ camera.name }} Events{% endblock %}
+
+{% block content %}
+<h1>{{ camera.name }} Events</h1>
+
+<div id="mjpeg-stream">
+    <img src="{{ camera.mjpeg_url }}" alt="MJPEG Stream">
+</div>
+
+<div id="event-list">
+    {% for event in events %}
+    <div class="event-item">
+        <p><strong>License Plate:</strong> {{ event.license_plate }}</p>
+        <p><strong>Timestamp:</strong> {{ event.timestamp }}</p>
+        <p><strong>Access Granted:</strong> {% if event.access_granted %}Yes{% else %}No{% endif %}</p>
+        <p><strong>Reason:</strong> {{ event.reason_for_refuse|default:"N/A" }}</p>
+    </div>
+    {% endfor %}
+</div>
+
+<div id="pagination">
+    {% if has_previous %}
+    <a href="?page={{ current_page|add:"-1" }}">Previous</a>
+    {% endif %}
+    
+    Page {{ current_page }} of {{ total_pages }}
+    
+    {% if has_next %}
+    <a href="?page={{ current_page|add:"1" }}">Next</a>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block extra_body %}
+<script>
+    const cameraId = '{{ camera.camera_id }}';
+    const socketUrl = 'ws://' + window.location.host + '/ws/events/' + cameraId + '/';
+    let socket = new WebSocket(socketUrl);
+
+    const eventList = document.getElementById('event-list');
+
+    function setupWebSocket() {
+        socket.onmessage = function(e) {
+            const data = JSON.parse(e.data);
+            if (data.message) {
+                const newEvent = data.message;
+                const eventDiv = document.createElement('div');
+                eventDiv.className = 'event-item';
+                eventDiv.innerHTML = `
+                    <p><strong>License Plate:</strong> ${newEvent.license_plate}</p>
+                    <p><strong>Timestamp:</strong> ${newEvent.timestamp}</p>
+                    <p><strong>Access Granted:</strong> ${newEvent.access_granted ? 'Yes' : 'No'}</p>
+                    <p><strong>Reason:</strong> ${newEvent.reason_for_refuse || 'N/A'}</p>
+                `;
+                eventList.insertBefore(eventDiv, eventList.firstChild);
+                
+                if (eventList.children.length > 10) {
+                    eventList.removeChild(eventList.lastChild);
+                }
+            }
+        };
+
+        socket.onclose = function(e) {
+            console.error('Chat socket closed unexpectedly:', e);
+            console.log('Attempting to reconnect...');
+            setTimeout(() => {
+                socket = new WebSocket(socketUrl);
+                setupWebSocket();
+            }, 5000); // Try to reconnect every 5 seconds
+        };
+
+        socket.onerror = function(error) {
+            console.error('WebSocket Error:', error);
+        };
+    }
+
+    setupWebSocket();
+</script>
+{% endblock %}
+

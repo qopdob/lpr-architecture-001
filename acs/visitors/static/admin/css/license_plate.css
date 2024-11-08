@@ -1,0 +1,136 @@
+@font-face {
+    font-family: 'NumberFont';
+    src: url('../fonts/RoadNumbers2.0.ttf') format('truetype'),
+    url('../fonts/RoadNumbers2.0.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.license-plate {
+    font-family: 'NumberFont', sans-serif;
+    color: #222222;
+    width: 300px;
+    height: 50px;
+    background: #222222;
+    border: 4px solid #222222;
+    border-radius: 6px;
+    display: flex;
+}
+
+.left-section {
+    width: 230px;
+    height: 100%;
+    background: #ffffff;
+    border-right: 2px solid #222222;
+    border-radius: 6px;
+    display: flex;
+}
+
+.right-section {
+    width: 70px;
+    height: 100%;
+    background: #ffffff;
+    border-left: 2px solid #222222;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+}
+
+.license-plate.three-digit .left-section {
+    width: 220px;
+}
+
+.license-plate.three-digit .right-section {
+    width: 80px;
+}
+
+.car .left-section, .car .right-section {
+    background-color: white;
+    color: black;
+}
+
+.public .left-section, .public .right-section {
+    background-color: yellow;
+    color: black;
+}
+
+.military .left-section, .military .right-section {
+    background-color: black;
+    color: white;
+}
+
+.diplomatic .left-section, .diplomatic .right-section {
+    background-color: red;
+    color: white;
+}
+
+.police .left-section, .police .right-section {
+    background-color: blue;
+    color: white;
+}
+
+.text-container {
+    position: relative;
+    height: 100%;
+}
+
+.text-container-1 { width: 20%; }
+.text-container-2 { width: 45%; }
+.text-container-3 { width: 35%; }
+
+.car .text-container-1 { width: 20%; }
+.car .text-container-2 { width: 45%; }
+.car .text-container-3 { width: 35%; }
+
+.public .text-container-1 { width: 50%; }
+.public .text-container-2 { width: 50%; }
+.public .text-container-3 { width: 10%; }
+
+.military .text-container-1 { width: 65%; }
+.military .text-container-2 { width: 35%; }
+.military .text-container-3 { width: 0; }
+
+.diplomatic .text-container-1 { width: 50%; }
+.diplomatic .text-container-2 { width: 18%; }
+.diplomatic .text-container-3 { width: 37%; }
+
+.police .text-container-1 { width: 30%; }
+.police .text-container-2 { width: 60%; }
+.police .text-container-3 { width: 10%; }
+
+.right-top {
+    height: 70%;
+    position: relative;
+}
+
+.right-bottom {
+    height: 30%;
+    position: relative;
+}
+
+.text {
+    font-size: 68px;
+    letter-spacing: 2px;
+    position: absolute;
+    line-height: 1;
+    right: 3px;
+    bottom: -23px;
+    white-space: nowrap;
+}
+
+.diplomatic .text-container-3 .text {
+    font-size: 54px;
+    bottom: -18px;
+}
+
+.region {
+    left: 5px;
+    font-size: 50px;
+    bottom: -19px;
+}
+
+.rus {
+    right: 0;
+    font-size: 10px;
+    bottom: 0;
+}

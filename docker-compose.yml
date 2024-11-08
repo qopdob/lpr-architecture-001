@@ -1,0 +1,96 @@
+version: '3.8'
+
+services:
+  lpr:
+    build: ./lpr
+    volumes:
+      - ./lpr:/app
+    depends_on:
+      - acs
+    restart: unless-stopped
+
+  acs:
+    build: ./acs
+    command: bash -c "python manage.py collectstatic --noinput --clear && daphne -b 0.0.0.0 -p 8000 visitor_management.asgi:application"
+#    command: bash -c "python manage.py runserver 0.0.0.0:8000"
+    ports:
+      - "8000:8000"
+    environment:
+      - HOST_IP=192.168.0.100
+      - DATABASE_URL=postgres://postgres:postgres@db:5432/acs_db
+      - MEDIA_URL=/images/
+      - MEDIA_ROOT=/images
+    depends_on:
+      - db
+      - redis
+    volumes:
+      - ./acs:/app
+      - static_volume:/app/staticfiles
+      - images_volume:/images
+    restart: unless-stopped
+
+  server:
+    build: ./server
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./server:/app
+    environment:
+        - FLASK_ENV=production
+    restart: unless-stopped
+
+  onvif:
+    build: ./onvif
+    volumes:
+      - ./onvif:/app
+    ports:
+      - "8081:8080"
+    environment:
+        - FLASK_ENV=production
+    restart: unless-stopped
+
+  logic:
+    build: ./logic
+    volumes:
+      - ./logic:/app
+    ports:
+      - "5000:5000"
+    environment:
+        - FLASK_ENV=production
+    restart: unless-stopped
+
+  plate:
+    build: ./plate
+    volumes:
+      - ./plate:/app
+      - plates_volume:/plates
+    ports:
+      - "5050:5050"
+    environment:
+        - FLASK_ENV=production
+    restart: unless-stopped
+    depends_on:
+      - selenium
+
+  selenium:
+    image: selenium/standalone-chrome:latest
+
+  db:
+    image: postgres:13
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_DB=acs_db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    restart: unless-stopped
+
+  redis:
+    image: redis:6
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  static_volume:
+  images_volume:
+  plates_volume:

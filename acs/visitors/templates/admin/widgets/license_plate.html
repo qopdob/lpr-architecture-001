@@ -1,0 +1,37 @@
+{% verbatim %}
+<div id="license-plate-{{ widget.name }}" class="license-plate" data-plate-type="{{ plate_type }}" data-parts="{{ parts_json }}">
+    <div class="left-section">
+        <div class="text-container text-container-1">
+            <span class="text" id="part1-{{ widget.name }}"></span>
+        </div>
+        <div class="text-container text-container-2">
+            <span class="text" id="part2-{{ widget.name }}"></span>
+        </div>
+        <div class="text-container text-container-3">
+            <span class="text" id="part3-{{ widget.name }}"></span>
+        </div>
+    </div>
+    <div class="right-section">
+        <div class="right-top">
+            <span class="text region" id="region-{{ widget.name }}"></span>
+        </div>
+        <div class="right-bottom">
+            <span class="text rus">RUS</span>
+        </div>
+    </div>
+</div>
+{% endverbatim %}
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var licensePlateElements = document.querySelectorAll('.license-plate');
+        licensePlateElements.forEach(function(element) {
+            var widgetName = element.id.replace('license-plate-', '');
+            var plateType = element.getAttribute('data-plate-type');
+            console.log('Raw parts data:', element.getAttribute('data-parts'));
+            var parts = JSON.parse(element.getAttribute('data-parts'));
+            setupLicensePlate(widgetName, plateType, parts);
+        });
+    });
+</script>
+

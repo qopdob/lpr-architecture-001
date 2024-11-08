@@ -1,0 +1,7 @@
+numpy==1.26.4
+opencv-python-headless==4.9.0.80
+openvino==2023.3.0
+torch==2.2.1
+torchvision==0.17.1
+onvif-zeep==0.2.12
+pytz

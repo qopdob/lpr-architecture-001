@@ -1,0 +1,7 @@
+Flask==2.0.3
+Werkzeug==2.0.3
+flask-cors==3.0.10
+requests==2.26.0
+python-dotenv==0.19.1
+onvif-zeep==0.2.12
+

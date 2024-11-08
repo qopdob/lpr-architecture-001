@@ -1,0 +1,18 @@
+description: Ultralytics YOLOv8n-seg model trained on /mnt/fast_remotestorage/dataset_manual6cl_004/data.yaml
+author: Ultralytics
+license: AGPL-3.0 https://ultralytics.com/license
+date: '2024-01-24T11:51:20.850989'
+version: 8.1.5
+stride: 32
+task: segment
+batch: 1
+imgsz:
+- 640
+- 640
+names:
+  0: car
+  1: car2
+  2: diplomatic
+  3: military
+  4: police
+  5: public

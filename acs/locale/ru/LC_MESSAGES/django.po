@@ -1,0 +1,309 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-08-12 08:05+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
+"(n%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: visitor_management/settings.py:120
+msgid "English"
+msgstr "Английский"
+
+#: visitor_management/settings.py:121
+msgid "Russian"
+msgstr "Русский"
+
+#: visitor_management/urls.py:7
+#, fuzzy
+#| msgid "Access Control System | Administration"
+msgid "GPark | Administration"
+msgstr "GPark | Администрирование"
+
+#: visitor_management/urls.py:8
+msgid "GPark"
+msgstr ""
+
+#: visitor_management/urls.py:9
+msgid "Parking"
+msgstr "Парковка"
+
+#: visitors/admin.py:41
+msgid "Company"
+msgstr "Компания"
+
+#: visitors/admin.py:46
+msgid "Has Access"
+msgstr "Доступ"
+
+#: visitors/admin.py:76
+msgid "Open Gate"
+msgstr "Открыть Доступ"
+
+#: visitors/admin.py:79
+msgid "Gate"
+msgstr "Шлагбаум"
+
+#: visitors/admin.py:139
+msgid "Cameras"
+msgstr "Камеры"
+
+#: visitors/admin.py:158 visitors/models.py:223
+msgid "No Image"
+msgstr "Без Изображения"
+
+#: visitors/admin.py:159 visitors/models.py:188 visitors/models.py:225
+msgid "Image Preview"
+msgstr "Снимок"
+
+#: visitors/admin.py:163
+msgid "Plate"
+msgstr "Номер"
+
+#: visitors/admin.py:167 visitors/admin.py:188
+msgid "Camera"
+msgstr "Камера"
+
+#: visitors/admin.py:174 visitors/admin.py:252
+msgid "Visitor"
+msgstr "Посетитель"
+
+#: visitors/admin.py:181 visitors/admin.py:188 visitors/admin.py:242
+msgid "License Plate"
+msgstr "Номерной Знак"
+
+#: visitors/admin.py:188
+msgid "Visitor Title"
+msgstr "Посетитель"
+
+#: visitors/admin.py:188
+msgid "Timestamp"
+msgstr "Временная Метка"
+
+#: visitors/admin.py:188
+msgid "Access Granted"
+msgstr "Доступ Разрешён"
+
+#: visitors/admin.py:188
+msgid "Reason for Refuse"
+msgstr "Причина Отказа"
+
+#: visitors/admin.py:192 visitors/admin.py:197 visitors/admin.py:217
+#: visitors/admin.py:221 visitors/admin.py:230 visitors/admin.py:239
+#: visitors/admin.py:247 visitors/admin.py:250 visitors/models.py:101
+msgid "N/A"
+msgstr " "
+
+#: visitors/admin.py:201
+msgid "Export selected events to CSV"
+msgstr "Экспорт выбранных событий в формате CSV"
+
+#: visitors/admin.py:225
+msgid "In Timestamp"
+msgstr "Время въезда"
+
+#: visitors/admin.py:234
+msgid "Out Timestamp"
+msgstr "Время выезда"
+
+#: visitors/models.py:54 visitors/models.py:150 visitors/models.py:165
+msgid "name"
+msgstr "имя"
+
+#: visitors/models.py:55 visitors/models.py:73
+msgid "comment"
+msgstr "комментарий"
+
+#: visitors/models.py:61 visitors/models.py:74
+msgid "company"
+msgstr "компания"
+
+#: visitors/models.py:62
+msgid "companies"
+msgstr "компании"
+
+#: visitors/models.py:66
+msgid "first name"
+msgstr "имя"
+
+#: visitors/models.py:67
+msgid "middle name"
+msgstr "отчество"
+
+#: visitors/models.py:68
+msgid "last name"
+msgstr "фамилия"
+
+#: visitors/models.py:69 visitors/models.py:206
+msgid "license plate"
+msgstr "номерной знак"
+
+#: visitors/models.py:70
+msgid "beginning of access"
+msgstr "начало доступа"
+
+#: visitors/models.py:71
+msgid "end of access"
+msgstr "окончание доступа"
+
+#: visitors/models.py:72
+msgid "blacklisted"
+msgstr "в чёрном списке"
+
+#: visitors/models.py:99
+#, python-format
+msgid "%(last_name)s, %(first_name)s (%(license_plate)s)"
+msgstr "%(last_name)s, %(first_name)s (%(license_plate)s)"
+
+#: visitors/models.py:108
+msgid "End of access cannot be before beginning of access."
+msgstr "Дата окончания доступа не может быть раньше даты начала доступа."
+
+#: visitors/models.py:136
+msgid "Invalid license plate format."
+msgstr "Неверный формат номерного знака."
+
+#: visitors/models.py:144 visitors/models.py:211
+msgid "visitor"
+msgstr "посетитель"
+
+#: visitors/models.py:145
+msgid "visitors"
+msgstr "посетители"
+
+#: visitors/models.py:151
+msgid "IP address"
+msgstr "IP адрес"
+
+#: visitors/models.py:152
+msgid "port"
+msgstr "порт"
+
+#: visitors/models.py:153 visitors/models.py:170
+msgid "username"
+msgstr "имя пользователя"
+
+#: visitors/models.py:154 visitors/models.py:171
+msgid "password"
+msgstr "пароль"
+
+#: visitors/models.py:160 visitors/models.py:173
+msgid "gate"
+msgstr "шлагбаум"
+
+#: visitors/models.py:161
+msgid "gates"
+msgstr "шлагбаумы"
+
+#: visitors/models.py:166
+msgid "stream IP"
+msgstr "IP потока"
+
+#: visitors/models.py:167
+msgid "stream port"
+msgstr "порт потока"
+
+#: visitors/models.py:168
+msgid "stream path"
+msgstr "путь потока"
+
+#: visitors/models.py:169
+msgid "MJPEG path"
+msgstr "путь MJPEG"
+
+#: visitors/models.py:172
+msgid "is entrance"
+msgstr "Отвечает за ВЪЕЗД?"
+
+#: visitors/models.py:199 visitors/models.py:204
+msgid "camera"
+msgstr "камера"
+
+#: visitors/models.py:200
+msgid "cameras"
+msgstr "камеры"
+
+#: visitors/models.py:205
+msgid "timestamp"
+msgstr "временная метка"
+
+#: visitors/models.py:207
+msgid "access granted"
+msgstr "доступ разрешён"
+
+#: visitors/models.py:208
+msgid "opened manually"
+msgstr "допущен оператором"
+
+#: visitors/models.py:209
+msgid "reason for refuse"
+msgstr "причина отказа"
+
+#: visitors/models.py:210
+msgid "image"
+msgstr "изображение"
+
+#: visitors/models.py:214
+#, python-format
+msgid "%(license_plate)s at %(timestamp)s - %(status)s"
+msgstr "%(license_plate)s в %(timestamp)s - %(status)s"
+
+#: visitors/models.py:217
+msgid "Granted"
+msgstr "Разрешено"
+
+#: visitors/models.py:217
+msgid "Refused"
+msgstr "Отказано"
+
+#: visitors/models.py:234
+msgid "event"
+msgstr "событие"
+
+#: visitors/models.py:235
+msgid "events"
+msgstr "события"
+
+#: visitors/models.py:239
+msgid "in event"
+msgstr "событие въезда"
+
+#: visitors/models.py:240
+msgid "out event"
+msgstr "событие выезда"
+
+#: visitors/models.py:241
+msgid "in event type"
+msgstr "тип события въезда"
+
+#: visitors/models.py:242
+msgid "out event type"
+msgstr "тип события выезда"
+
+#: visitors/models.py:245
+msgid "Session"
+msgstr "Сессия"
+
+#: visitors/models.py:246
+msgid "Sessionss"
+msgstr "Сессии"
+
+#~ msgid "ACS Panel"
+#~ msgstr "СКУД Панель"
+
+#~ msgid "ACS Portal"
+#~ msgstr "СКУД Портал"

@@ -1,0 +1,6 @@
+eventlet
+Flask
+Flask-Cors
+Flask-SocketIO
+requests
+dnspython

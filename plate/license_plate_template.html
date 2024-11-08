@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic License Plate Display</title>
+    <style>
+        @font-face {
+            font-family: 'NumberFont';
+            src: url('/static/fonts/RoadNumbers2.2.ttf') format('truetype');
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: white;
+        }
+
+        .license-plate-wrapper {
+            width: 478px;
+            padding: 2px;
+            background: black;
+            border-radius: 16px;
+        }
+
+        .military .license-plate-wrapper, .police .license-plate-wrapper, .diplomatic .license-plate-wrapper {
+            padding: 0;
+            background: #e6e8f1;
+        }
+
+        .license-plate-inner {
+            padding: 2px;
+            background: #e6e8f1;
+            border-radius: 14px;
+        }
+
+        .military .license-plate-inner , .police .license-plate-inner , .diplomatic .license-plate-inner   {
+            padding: 2px;
+            background: black;
+            border-radius: 14px;
+        }
+
+        .license-plate {
+            font-family: 'NumberFont', sans-serif;
+            color: #222222;
+            width: 462px;
+            height: 100px;
+            background: #222222;
+            border: 6px solid #222222;
+            border-radius: 12px;
+            display: flex;
+            position: relative;
+        }
+
+        .license-plate.military, .license-plate.police, .license-plate.diplomatic {
+            background: #e6e8f1;
+            border: 6px solid #e6e8f1;
+        }
+
+        .mounting-hole {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #6b6b6b;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            box-shadow:
+                    inset 0.05em 0.05em 0.05em rgba(0,0,0),
+                    inset 0.02em 0.02em 0.02em rgba(0,0,0, 0.5);
+        }
+
+        .mounting-hole.left {
+            left: 8px;
+        }
+
+        .mounting-hole.right {
+            right: 8px;
+        }
+
+        .left-section, .right-section {
+            box-shadow:
+                    inset 0.02em 0.02em 0.02em rgba(0,0,0, 0.3),
+                    inset -0.1em -0.1em 0.1em rgba(255,255,255, 0.3),
+                    inset -0.1em -0.1em 0.1em rgba(255,255,255, 0.3);
+        }
+
+        .military .left-section, .military .right-section {
+            box-shadow:
+                    inset 0.01em 0.01em 0.01em rgba(0,0,0, 0.3),
+                    inset -0.1em -0.1em 0.1em rgba(255,255,255, 0.3),
+                    inset -0.05em -0.05em 0.05em rgba(255,255,255, 0.3);
+        }
+
+        .left-section {
+            width: 356px;
+            height: 100%;
+            background: #e6e8f1;
+            border-right: 2px solid #222222;
+            border-radius: 8px;
+            display: flex;
+        }
+
+        .military .left-section, .police .left-section, .diplomatic .left-section {
+            border-right: 2px solid #e6e8f1;
+        }
+
+        .right-section {
+            width: 106px;
+            height: 100%;
+            background: #e6e8f1;
+            border-left: 2px solid #222222;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .military .right-section, .police .right-section, .diplomatic .right-section{
+            border-left: 2px solid #e6e8f1;
+        }
+
+        .license-plate.three-digit .left-section {
+            width: 324px;
+        }
+
+        .license-plate.three-digit .right-section {
+            width: 134px;
+        }
+
+        .car .left-section, .car .right-section {
+            background-color: #e6e8f1;
+            color: black;
+        }
+
+        .public .left-section, .public .right-section {
+            background-color: #e1a729;
+            color: black;
+        }
+
+        .military .left-section, .military .right-section {
+            background-color: #282828;
+            color: #e6e8f1;
+        }
+
+        .diplomatic .left-section, .diplomatic .right-section {
+            background-color: #a21b29;
+            color: #e6e8f1;
+        }
+
+        .police .left-section, .police .right-section {
+            background-color: #1c2f8f;
+            color: #e6e8f1;
+        }
+
+        .text-container {
+            position: relative;
+            height: 100%;
+        }
+
+        .text-container-1 { width: 25%; }
+        .text-container-2 { width: 40%; }
+        .text-container-3 { width: 35%; }
+
+        .car .text-container-1 { width: 26%; }
+        .car .text-container-2 { width: 47%; }
+        .car .text-container-3 { width: 32%; }
+
+        .three-digit.car .text-container-1 { width: 27%; }
+        .three-digit.car .text-container-2 { width: 47%; }
+        .three-digit.car .text-container-3 { width: 31%; }
+
+        .public .text-container-1 { width: 43%; }
+        .public .text-container-2 { width: 52%; }
+        .public .text-container-3 { width: 5%; }
+
+        .military .text-container-1 { width: 65%; }
+        .military .text-container-2 { width: 35%; }
+        .military .text-container-3 { width: 0; }
+
+        .diplomatic .text-container-1 { width: 52%; }
+        .diplomatic .text-container-2 { width: 15%; }
+        .diplomatic .text-container-3 { width: 33%; }
+
+        .police .text-container-1 { width: 30%; }
+        .police .text-container-2 { width: 65%; }
+        .police .text-container-3 { width: 5%; }
+
+        .right-top {
+            height: 70%;
+            position: relative;
+        }
+
+        .right-bottom {
+            height: 30%;
+            position: relative;
+        }
+
+        .text {
+            font-size: 106px;
+            letter-spacing: 6px;
+            position: absolute;
+            line-height: 1;
+            right: 10px;
+            bottom: -8px;
+            white-space: nowrap;
+            text-shadow:
+                    -0.01em -0.01em 0.02em rgb(255, 255, 255, 0.3),
+                    -0.01em -0.01em 0.01em rgb(255, 255, 255, 0.3),
+                    0.01em 0.01em 0.02em rgba(0,0,0,0.6);
+        }
+
+        .two-digit.car .text-container-3 .text {
+            letter-spacing: 4px;
+            left: 0;
+        }
+
+        .three-digit.car .text-container-3 .text {
+            letter-spacing: 0;
+            right: 10px;
+        }
+
+        .diplomatic .text-container-3 .text {
+            letter-spacing: 2px;
+            font-size: 88px;
+            bottom: -6px;
+        }
+
+        .diplomatic .text-container-2 .text {
+            font-size: 112px;
+            bottom: -10px;
+        }
+
+        .police .text-container-2 .text {
+            letter-spacing: 4px;
+        }
+
+        .region {
+            left: 10px;
+            font-size: 80px;
+            bottom: -12px;
+            letter-spacing: 4px;
+        }
+
+        .three-digit .region {
+            left: 4px;
+            letter-spacing: 6px;
+        }
+
+        .rus {
+            font-family: "Arial", sans-serif;
+            right: 32px;
+            font-size: 24px;
+            bottom: 8px;
+            letter-spacing: 2px;
+        }
+
+        .car .rus {
+            right: 46px;
+        }
+
+        .flag {
+            width: 36px;
+            height: 18px;
+            position: absolute;
+            bottom: -2px;
+            right: 6px;
+            transform: translateY(-50%);
+            border: 2px solid #222222;
+            border-radius: 0.03em;
+            background: linear-gradient(
+                    to bottom,
+                    #e6e8f1 0%,
+                    #e6e8f1 33.33%,
+                    #1561c4 33.33%,
+                    #1561c4 66.66%,
+                    #D52B1E 66.66%,
+                    #D52B1E 100%
+            );
+            display: none;
+        }
+
+        .car .flag {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+<div id="license-plate-wrapper" class="license-plate-wrapper">
+    <div id="license-plate-inner" class="license-plate-inner">
+        <div id="license-plate" class="license-plate">
+            <div class="mounting-hole left"></div>
+            <div class="mounting-hole right"></div>
+            <div class="flag"></div>
+            <div class="left-section">
+                <div class="text-container text-container-1">
+                    <span class="text" id="part1"></span>
+                </div>
+                <div class="text-container text-container-2">
+                    <span class="text" id="part2"></span>
+                </div>
+                <div class="text-container text-container-3">
+                    <span class="text" id="part3"></span>
+                </div>
+            </div>
+            <div class="right-section">
+                <div class="right-top">
+                    <span class="text region" id="region"></span>
+                </div>
+                <div class="right-bottom">
+                    <span class="text rus">RUS</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function setupLicensePlate(plateType, parts) {
+        const licensePlate = document.getElementById('license-plate');
+        const licensePlateWrapper = document.getElementById('license-plate-wrapper');
+        const part1 = document.getElementById('part1');
+        const part2 = document.getElementById('part2');
+        const part3 = document.getElementById('part3');
+        const region = document.getElementById('region');
+
+        // Clear existing classes
+        licensePlate.className = 'license-plate';
+
+        // Add plate type class
+        licensePlate.classList.add(plateType);
+        licensePlateWrapper.classList.add(plateType);
+
+        // Set content and handle 3-digit region
+        switch (plateType) {
+            case 'car':
+                part1.textContent = parts[0];
+                part2.textContent = parts[1];
+                part2.textContent = parts[1];
+                part3.textContent = parts[2];
+                region.textContent = parts[3];
+                break;
+            case 'public':
+                part1.textContent = parts[0];
+                part2.textContent = parts[1];
+                part3.textContent = '';
+                region.textContent = parts[2];
+                break;
+            case 'military':
+                part1.textContent = parts[0];
+                part2.textContent = parts[1];
+                part3.textContent = '';
+                region.textContent = parts[2];
+                break;
+            case 'diplomatic':
+                part1.textContent = parts[0];
+                part2.textContent = parts[1];
+                part3.textContent = parts[2];
+                region.textContent = parts[3];
+                break;
+            case 'police':
+                part1.textContent = parts[0];
+                part2.textContent = parts[1];
+                part3.textContent = '';
+                region.textContent = parts[2];
+                break;
+        }
+
+        // Add three-digit class if region has 3 digits
+        if (region.textContent.length === 3) {
+            licensePlate.classList.add('three-digit');
+        }
+        else {
+            licensePlate.classList.add('two-digit');
+        }
+    }
+
+    // Example usage:
+    // setupLicensePlate('car', ['k', '009', 'bh', '57']);
+    // setupLicensePlate('public', ['aa', '000', '50']);
+    // setupLicensePlate('military', ['1234', 'cx', '11']);
+    // setupLicensePlate('diplomatic', ['004', 'd', '312', '97']);
+    // setupLicensePlate('police', ['k', '0870', '42']);
+
+</script>
+</body>
+</html>
